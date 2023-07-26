@@ -4,19 +4,17 @@ namespace App\Http\Controllers\back;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DB;
 
 class DashboardController extends Controller
 {
-    public function __construct(){
-        if(!session('is_logged')) {
-            return redirect('/');
-        }
-    }
-
     public function index(){
         $data = [
             'title' => 'Dashboard',
-            'content' => 'back.dashboard'
+            'content' => 'back.dashboard',
+            'ticket_orders' => DB::select(
+                "select count(*) form ticket_orders"
+            )
         ];
 
         return view('back.index',['data' => $data]);
