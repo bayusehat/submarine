@@ -38,4 +38,9 @@ Route::middleware(['user-access'])->group(function () {
     Route::get('/verify/{id}/{status}','App\Http\Controllers\back\TicketController@verify');
     Route::get('/scan','App\Http\Controllers\back\TicketController@scanner_page');
     Route::get('/scan/{id}','App\Http\Controllers\back\TicketController@scan_ticket');
+
+    Route::get('/roster','App\Http\Controllers\back\RosterController@index');
+    Route::get('/roster/load','App\Http\Controllers\back\RosterController@loadRoster');
+    Route::get('/roster/create','App\Http\Controllers\back\RosterController@create');
+    Route::post('/roster/insert','App\Http\Controllers\back\RosterController@insert');
 });

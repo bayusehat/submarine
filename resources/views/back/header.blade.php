@@ -29,6 +29,7 @@
     <!-- Stylesheets -->
     <!-- Codebase framework -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="{{ asset('assets_back/js/fileupload/dist/aksFileUpload.min.js') }}"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('assets_back/js/codebase.app.min.js') }}"></script>
     <!-- Page JS Plugins -->
@@ -42,6 +43,7 @@
     <script src="https://cdn.datatables.net/fixedheader/3.3.2/js/dataTables.fixedHeader.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.4.1/js/responsive.bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('assets_back/js/fileupload/dist/aksFileUpload.min.css') }}" />
 
     <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
     <!-- <link rel="stylesheet" id="css-theme" href="{{ asset('assets_back/css/themes/flat.min.css') }}"> -->
@@ -236,6 +238,11 @@
                         <span class="nav-main-link-name">Genre</span>
                       </a>
                     </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ url('/roster') }}">
+                          <span class="nav-main-link-name">Roster</span>
+                        </a>
+                      </li>
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{ url('/release') }}">
                           <span class="nav-main-link-name">Release</span>
