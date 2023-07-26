@@ -64,7 +64,6 @@ class RosterController extends Controller
                 $realPhoto = $photo->getClientOriginalName();
             }else{
                 $realPhoto = 'dummy.jpg';
-                // return redirect()->back()->with('failed','Photo not valid');
             }
 
             $rs = new Roster;
@@ -72,7 +71,12 @@ class RosterController extends Controller
             $rs->roster_photo = $realPhoto;
             $rs->description = $request->input('description');
             if($rs->save()){
-                return redirect()->back()->with('success','New Roster created!');
+                if($realPhoto != 'dummy.jpg'){
+                    $file->move(public_path().'/assets/img/roster',$file->getClientOriginalName());
+                    return redirect()->back()->with('success','New Roster created!');
+                }else{
+                    return redirect()->back()->with('failed','Failed upload Roster Photo!');
+                }
             }else{
                 return redirect()->back()->with('failed','Failed to create Roster!');
             }

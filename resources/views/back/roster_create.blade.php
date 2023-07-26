@@ -31,6 +31,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12 space-y-2">
                             <form method="post" action="{{ url('roster/insert') }}" id="formCreate" enctype="multipart/form-data"
                             >
+                            @csrf
                                 <div class="form-group">
                                     <label for="">Roster Name</label>
                                     <input type="text" class="form-control" name="roster_name" id="roster_name" placeholder="Hi-Standard">
@@ -46,7 +47,7 @@
                                     <textarea name="description" id="description" class="form-control"></textarea>
                                     @error('description') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mt-3">
                                    <input type="submit" name="submit" id="submit" class="btn btn-success" value="Create new Roster">
                                 </div>
                             </form>

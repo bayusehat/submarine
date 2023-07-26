@@ -218,7 +218,7 @@
           <div class="js-sidebar-scroll">
             <!-- Side Navigation -->
             <div class="content-side content-side-full">
-                <a href="{{ url('/home') }}" class="btn btn-primary w-100 push d-flex align-items-center justify-content-between"><span>Back To Store Page</span><i class="fa fa-plus opacity-50 ms-1"></i></a>
+                <a href="{{ url('/') }}" class="btn btn-primary w-100 push d-flex align-items-center justify-content-between"><span>Back To Store Page</span><i class="fa fa-plus opacity-50 ms-1"></i></a>
               <ul class="nav-main">
                 <li class="nav-main-item">
                   <a class="nav-main-link" href="{{ url('/dashboard') }}">
