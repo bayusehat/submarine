@@ -49,7 +49,7 @@ class RosterController extends Controller
 
     public function insertRoster(Request $request){
         $rules = [
-            'name' => 'required',
+            'roster_name' => 'required',
             'roster_photo' => 'required|mimes:jpeg,png|size:10000',
             'description' => 'required|min:100'
         ];
@@ -67,12 +67,12 @@ class RosterController extends Controller
             }
 
             $rs = new Roster;
-            $rs->name = $request->input('name');
+            $rs->name = $request->input('roster_name');
             $rs->roster_photo = $realPhoto;
             $rs->description = $request->input('description');
             if($rs->save()){
                 if($realPhoto != 'dummy.jpg'){
-                    $file->move(public_path().'/assets/img/roster',$file->getClientOriginalName());
+                    $file->move(public_path('/assets/img/roster'),$file->getClientOriginalName());
                     return redirect()->back()->with('success','New Roster created!');
                 }else{
                     return redirect()->back()->with('failed','Failed upload Roster Photo!');

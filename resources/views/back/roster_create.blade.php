@@ -32,22 +32,22 @@
                             <form method="post" action="{{ url('roster/insert') }}" id="formCreate" enctype="multipart/form-data"
                             >
                             @csrf
-                                <div class="form-group">
-                                    <label for="">Roster Name</label>
-                                    <input type="text" class="form-control" name="roster_name" id="roster_name" placeholder="Hi-Standard">
+                                <div class="form-floating mb-4">
+                                    <input type="text" class="form-control" name="roster_name" id="roster_name" placeholder="Enter Roster Name">
+                                    <label class="form-label" for="roster_name">Roster Name</label>
                                     @error('roster_name') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
-                                <div class="form-group">
-                                    <label for="">Photo</label>
-                                    <input type="file" name="roster_photo" id="roster_photo" class="form-control">
+                                <div class="form-floating mb-4">
+                                    <input type="file" name="roster_photo" id="roster_photo" class="form-control" placeholder="Roster Photo">
+                                    <label class="form-label" for="roster_photo">Photo</label>
                                     @error('roster_photo') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
-                                <div class="form-group">
-                                    <label for="">Description</label>
-                                    <textarea name="description" id="description" class="form-control"></textarea>
+                                <div class="form-floating mb-4p">
+                                    <textarea name="description" id="description" class="form-control" placeholder="Description"></textarea>
+                                    <label class="form-label" for="description">Description</label>
                                     @error('description') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
-                                <div class="form-group mt-3">
+                                <div class="form-floating mt-4">
                                    <input type="submit" name="submit" id="submit" class="btn btn-success" value="Create new Roster">
                                 </div>
                             </form>

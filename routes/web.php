@@ -42,5 +42,5 @@ Route::middleware(['user-access'])->group(function () {
     Route::get('/roster','App\Http\Controllers\back\RosterController@index');
     Route::get('/roster/load','App\Http\Controllers\back\RosterController@loadRoster');
     Route::get('/roster/create','App\Http\Controllers\back\RosterController@create');
-    Route::post('/roster/insert','App\Http\Controllers\back\RosterController@insert');
+    Route::post('/roster/insert','App\Http\Controllers\back\RosterController@insertRoster');
 });
