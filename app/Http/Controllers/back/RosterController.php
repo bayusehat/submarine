@@ -120,7 +120,7 @@ class RosterController extends Controller
                 $rulesUpload = [
                     'roster_photo' => 'required|mimes:jpeg,png|dimensions:min_width=1000,min_height=1000',
                 ];
-                $isValidToUpload = Validator::make($request->file('roster_photo'),$rulesUpload);
+                $isValidToUpload = Validator::make($request->all(),$rulesUpload);
                 if($isValidToUpload->fails()){
                     return redirect()->back()->withErrors($isValid->errors());
                 }
