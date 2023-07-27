@@ -27,11 +27,11 @@ class HomeController extends Controller
         return view('front.index',['data' => $data]);
     }
 
-    public function artist_detail($id_roster){
-        $rs = Roster::with('release')->find($id_roster);
+    public function artist_detail($name){
+        $rs = Roster::with('release.release_type')->where('name',$name)->first();
         $data = [
             'title' => 'About '.$rs->name,
-            'content' => 'front.artists',
+            'content' => 'front.artist_detail',
             'roster' => $rs
         ];
 

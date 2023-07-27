@@ -198,7 +198,7 @@
                 <div class="grid_item">
                     <figure>
                         {{-- <span class="ribbon off">-30%</span> --}}
-                        <a href="product-detail-1.html">
+                        <a href="{{ url('artists/'.$rs->name) }}">
                             <img class="img-fluid lazy" src="{{ asset('assets/img/roster/'.$rs->roster_photo) }}" data-src="{{ asset('assets/img/roster/'.$rs->roster_photo) }}" alt="{{ $rs->roster_photo }}">
                         </a>
                         {{-- <div data-countdown="2019/05/15" class="countdown"></div> --}}

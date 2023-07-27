@@ -19,6 +19,7 @@ Route::post('/doreg','App\Http\Controllers\AuthController@doRegister');
 Route::post('/dologin','App\Http\Controllers\AuthController@login');
 Route::get('/dologout','App\Http\Controllers\AuthController@logout');
 Route::get('/artists','App\Http\Controllers\front\HomeController@artists');
+Route::get('/artists/{name}','App\Http\Controllers\front\HomeController@artist_detail');
 
 Route::middleware(['user-access'])->group(function () {
     Route::get('/dashboard','App\Http\Controllers\DashboardController@index');
