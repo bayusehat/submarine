@@ -51,7 +51,7 @@ class RosterController extends Controller
     public function insertRoster(Request $request){
         $rules = [
             'roster_name' => 'required',
-            'roster_photo' => 'required|mimes:jpeg,png',
+            'roster_photo' => 'required|mimes:jpeg,png|dimensions:min_width=1000,min_height=1000',
             'description' => 'required|min:10'
         ];
 
@@ -117,6 +117,13 @@ class RosterController extends Controller
             return redirect()->back()->withErrors($isValid->errors());
         }else{
             if($rs->roster_photo == 'dummy.jpg'){
+                $rulesUpload = [
+                    'roster_photo' => 'required|mimes:jpeg,png|dimensions:min_width=1000,min_height=1000',
+                ];
+                $isValidToUpload = Validator::make($request->file('roster_photo'),$rulesUpload);
+                if($isValidToUpload->fails()){
+                    return redirect()->back()->withErrors($isValid->errors());
+                }
                 $photo = $request->file('roster_photo');
                 if($request->has('roster_photo')){
                     $realPhoto = $photo->getClientOriginalName();
@@ -149,4 +156,6 @@ class RosterController extends Controller
             return response(['status' => 'failed', 'message' => 'Failed to delete Roster'], 400);
         }
     }
+
+    //Front
 }

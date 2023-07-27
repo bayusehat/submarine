@@ -29,7 +29,7 @@
                     <div class="block-content block-content-full">
                       <div class="row">
                         <div class="col-lg-12 space-y-2">
-                          <table class="table table-striped" id="tableGenre">
+                          <table class="table table-striped table-responsive" id="tableGenre" width="100%">
                             <thead>
                               <tr>
                                 <th>No</th>
@@ -59,6 +59,7 @@
             serverSide: true,
             destroy: true,
             paging: true,
+            responsive: true,
             ajax: {
                 url: '{{ url("roster/load") }}'
             },

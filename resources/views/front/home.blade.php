@@ -80,7 +80,7 @@
             </a>
         </li>
         <li>
-            <a href="#0" class="img_container">
+            <a href="{{ url('artists') }}" class="img_container">
                 <img src="{{ asset('assets/img/artists.png') }}" data-src="{{ asset('assets/img/artists.png') }}" alt="" class="lazy">
                 <div class="short_info opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.5)">
                     <h3>Artists</h3>

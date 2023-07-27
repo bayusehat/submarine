@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','App\Http\Controllers\front\HomeController@index');
 Route::get('/register','App\Http\Controllers\AuthController@register');
 Route::get('/login','App\Http\Controllers\AuthController@index');
-Route::post('/doreg','App\Http\Controllers\LoginController@doRegister');
+Route::post('/doreg','App\Http\Controllers\AuthController@doRegister');
 Route::post('/dologin','App\Http\Controllers\AuthController@login');
 Route::get('/dologout','App\Http\Controllers\AuthController@logout');
+Route::get('/artists','App\Http\Controllers\front\HomeController@artists');
 
 Route::middleware(['user-access'])->group(function () {
     Route::get('/dashboard','App\Http\Controllers\DashboardController@index');

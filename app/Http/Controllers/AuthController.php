@@ -67,7 +67,7 @@ class AuthController extends Controller
         if($isValid->fails()){
             return redirect()->back()->withErrors($isValid->errors());
         }else{
-            $reg = new Login;
+            $reg = new Auth;
             $reg->name = $request->input('name');
             $reg->phone = $request->input('phone');
             $reg->email = $request->input('email');

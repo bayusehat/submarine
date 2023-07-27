@@ -12,10 +12,10 @@
 
     <!-- Favicons-->
     <link rel="shortcut icon" href="{{ asset('assets/img/icon.png') }}" type="image/x-icon">
-    <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" href="{{ asset('assets/img/icon.png') }}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="{{ asset('assets/img/icon.png') }}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="{{ asset('assets/img/icon.png') }}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="{{ asset('assets/img/icon.png') }}">
 
     <!-- GOOGLE WEB FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -274,8 +274,8 @@
 								<div class="dropdown dropdown-access">
 									<a href="{{ url('/dashboard') }} }}" class="access_link"><span>Account</span></a>
 									<div class="dropdown-menu">
-										@if(!session('is_logged'))
-                                            <a href="{{ url('/login') }}" class="btn_1">Sign In or Sign Up</a>
+										@if(!session('isLogged'))
+                                            <a href="{{ url('/login') }}" class="btn_1">Login or Register</a>
                                         @else
                                              <a href="{{ url('/dashboard') }}" class="btn_1">{{ session('name') }}</a>
                                         @endif
