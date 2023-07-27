@@ -45,11 +45,11 @@
                         </div>
                       <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 space-y-2">
-                            <form method="post" action="{{ url('roster/insert') }}" id="formCreate" enctype="multipart/form-data"
+                            <form method="post" action="{{ url('roster/update/'.$roster->id_roster) }}" id="formCreate" enctype="multipart/form-data"
                             >
                             @csrf
                                 <div class="form-floating mb-4">
-                                    <input type="text" class="form-control" name="roster_name" id="roster_name" placeholder="Enter Roster Name">
+                                    <input type="text" class="form-control" name="roster_name" id="roster_name" placeholder="Enter Roster Name" value="{{ $roster->name }}">
                                     <label class="form-label" for="roster_name">Roster Name</label>
                                     @error('roster_name') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
@@ -59,17 +59,22 @@
                                     @error('roster_photo') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="form-floating mb-4p">
-                                    <textarea name="description" id="description" class="form-control" placeholder="Description"></textarea>
+                                    <textarea name="description" id="description" class="form-control" placeholder="Description">{{ $roster->description }}</textarea>
                                     <label class="form-label" for="description">Description</label>
                                     @error('description') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="form-floating mt-4">
-                                   <input type="submit" name="submit" id="submit" class="btn btn-success" value="Create new Roster">
+                                   <input type="submit" name="submit" id="submit" class="btn btn-primary" value="Update Roster">
                                 </div>
                             </form>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 space-y-2">
-
+                            <img src="{{ asset('assets/img/roster/'.$roster->roster_photo) }}" id="roster_photo_view" alt="{{ $roster->roster_photo}}" class="img-fluid img-responsive">
+                            @if ($roster->roster_photo != 'dummy.jpg')
+                                <a href="javascript:void(0)" class="btn btn-danger btn-sm text-center" onclick="removePhoto({{ $roster->id_roster }})"><i class="fas fa-times"></i> Hapus Foto</a>
+                            @else
+                                {{-- <a href="javascript:void(0)" class="btn btn-primary btn-sm text-center" onclick="updatePhoto({{ $roster->id_roster }})"><i class="fas fa-upload"></i> Upload Foto</a> --}}
+                            @endif
                         </div>
                       </div>
                     </div>
@@ -80,5 +85,21 @@
     </main>
   <!-- END Main Container -->
   <script>
+
+    function removePhoto(id){
+        var dummy_photo = '{{ asset("assets/img/roster/dummy.jpg") }}';
+        $.ajax({
+            url : '{{ url("roster/remove/image") }}/'+id,
+            method : 'GET',
+            dataType : 'JSON',
+            success:function(res){
+                if(res.status == 'success'){
+                    $("#roster_photo_view").attr('src',dummy_photo);
+                }else{
+                    alert(res.message);
+                }
+            }
+        })
+    }
 
   </script>

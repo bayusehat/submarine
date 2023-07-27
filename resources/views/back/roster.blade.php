@@ -64,7 +64,7 @@
             },
             columns: [
                 { name: 'DT_RowIndex', data: 'DT_RowIndex', orderable: false, searchable: false },
-                { name: 'roster', data: 'roster'},
+                { name: 'name', data: 'name'},
                 { name: 'action' , data: 'action'}
             ],
             lengthMenu: [10,50,-1],

@@ -43,4 +43,8 @@ Route::middleware(['user-access'])->group(function () {
     Route::get('/roster/load','App\Http\Controllers\back\RosterController@loadRoster');
     Route::get('/roster/create','App\Http\Controllers\back\RosterController@create');
     Route::post('/roster/insert','App\Http\Controllers\back\RosterController@insertRoster');
+    Route::get('/roster/edit/{id}','App\Http\Controllers\back\RosterController@editRoster');
+    Route::get('/roster/remove/image/{id}','App\Http\Controllers\back\RosterController@removePhoto');
+    Route::post('/roster/update/{id}','App\Http\Controllers\back\RosterController@updateRoster');
+    Route::get('/roster/delete/{id}','App\Http\Controllers\back\RosterController@deleteRoster');
 });
