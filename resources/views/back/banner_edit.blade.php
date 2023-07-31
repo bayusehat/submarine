@@ -56,9 +56,9 @@
                             </form>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 space-y-2">
-                            <img src="{{ asset('assets/img/banner/'.$banner->img_banner) }}" id="banner_photo_view" alt="{{ $banner->Banner_photo}}" class="img-fluid img-responsive">
-                            @if ($banner->Banner_photo != 'dummy.jpg')
-                                <a href="javascript:void(0)" class="btn btn-danger btn-sm text-center" onclick="removePhoto({{ $banner->id_Banner }})"><i class="fas fa-times"></i> Hapus Foto</a>
+                            <img src="{{ asset('assets/img/banner/'.$banner->img_banner) }}" id="banner_photo_view" alt="{{ $banner->img_banner}}" class="img-fluid img-responsive">
+                            @if ($banner->img_banner != 'dummy.jpg')
+                                <a href="javascript:void(0)" class="btn btn-danger btn-sm text-center" onclick="removePhoto({{ $banner->id_banner }})"><i class="fas fa-times"></i> Hapus Foto</a>
                             @else
                                 {{-- <a href="javascript:void(0)" class="btn btn-primary btn-sm text-center" onclick="updatePhoto({{ $Banner->id_Banner }})"><i class="fas fa-upload"></i> Upload Foto</a> --}}
                             @endif
@@ -74,7 +74,7 @@
   <script>
 
     function removePhoto(id){
-        var dummy_photo = '{{ asset("assets/img/banner/dummy.jpg") }}';
+        var dummy_photo = '{{ asset("assets/img/banner/dummy.png") }}';
         $.ajax({
             url : '{{ url("banner/remove/image") }}/'+id,
             method : 'GET',

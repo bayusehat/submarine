@@ -63,7 +63,7 @@ class BannerController extends Controller
             if($request->has('img_banner')){
                 $realPhoto = $photo->getClientOriginalName();
             }else{
-                $realPhoto = 'dummy.jpg';
+                $realPhoto = 'dummy.png';
             }
 
             $rs = new Banner;
@@ -74,7 +74,7 @@ class BannerController extends Controller
             $rs->status_banner = 0;
             $rs->position = 0;
             if($rs->save()){
-                if($realPhoto != 'dummy.jpg'){
+                if($realPhoto != 'dummy.png'){
                     $photo->move(public_path('/assets/img/banner'),$realPhoto);
                     return redirect()->back()->with('success','New Banner created!');
                 }else{
@@ -109,7 +109,7 @@ class BannerController extends Controller
             return redirect()->back()->withErrors($isValid->errors());
         }else{
             $realPhoto = '';
-            if($rs->roster_photo == 'dummy.jpg'){
+            if($rs->img_banner == 'dummy.png'){
                 $rulesUpload = [
                     'img_banner' => 'required|mimes:jpeg,png|dimensions:min_width=1000,min_height=1000',
                 ];
@@ -121,7 +121,7 @@ class BannerController extends Controller
                 if($request->has('img_banner')){
                     $realPhoto .= $photo->getClientOriginalName();
                 }else{
-                    $realPhoto .= 'dummy.jpg';
+                    $realPhoto .= 'dummy.png';
                 }
             }
 
@@ -135,7 +135,7 @@ class BannerController extends Controller
             $rs->status_banner = 0;
             $rs->position = 0;
             if($rs->save()){
-                if($realPhoto != 'dummy.jpg'){
+                if($realPhoto != 'dummy.png'){
                     if($realPhoto != ''){
                         $photo->move(public_path('/assets/img/banner'),$realPhoto);
                     }
@@ -157,5 +157,15 @@ class BannerController extends Controller
         }else{
             return response(['status' => 'failed', 'message' => 'Failed to delete Banner'], 400);
         }
+    }
+
+    public function removePhoto($id){
+        $rs = Banner::find($id);
+        if($rs)
+            $rs->img_banner = 'dummy.png';
+            if($rs->save())
+                return response(['status' => 'success', 'message' => 'Photo removed!']);
+
+        return response(['status' => 'failed', 'message' => 'Error remove photo']);
     }
 }
