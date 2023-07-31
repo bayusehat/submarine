@@ -254,9 +254,9 @@
                         </a>
                       </li>
                     <li class="nav-main-item">
-                    <a class="nav-main-link" href="{{ url('/banner') }}">
-                        <span class="nav-main-link-name">Banner</span>
-                    </a>
+                        <a class="nav-main-link" href="{{ url('/banner') }}">
+                            <span class="nav-main-link-name">Banner</span>
+                        </a>
                     </li>
                     {{-- <li class="nav-main-item">
                       <a class="nav-main-link" href="">
