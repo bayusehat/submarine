@@ -241,7 +241,7 @@
 						<ul class="top_tools">
 							<li>
 								<div class="dropdown dropdown-cart">
-									<a href="cart.html" class="cart_bt"><strong>2</strong></a>
+									<a href="#" class="cart_bt"></a>
 									<div class="dropdown-menu">
 										{{-- <ul>
 											<li>
@@ -272,7 +272,7 @@
 							</li>
 							<li>
 								<div class="dropdown dropdown-access">
-									<a href="{{ url('/dashboard') }} }}" class="access_link"><span>Account</span></a>
+									<a href="{{ url('/dashboard') }}" class="access_link"><span>Account</span></a>
 									<div class="dropdown-menu">
 										@if(!session('isLogged'))
                                             <a href="{{ url('/login') }}" class="btn_1">Login or Register</a>

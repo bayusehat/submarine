@@ -1,25 +1,27 @@
 <main>
     <div id="carousel-home">
         <div class="owl-carousel owl-theme">
-            <div class="owl-slide cover" style="background-image: url({{ asset('assets/img/banner1.png') }});">
-                <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
-                    <div class="container">
-                        <div class="row justify-content-center justify-content-md-end">
-                            <div class="col-lg-6 static">
-                                <div class="slide-text text-end white">
-                                    <h2 class="owl-slide-animated owl-slide-title">New Release!<br>Demo 2023 by OVER21</h2>
-                                    <p class="owl-slide-animated owl-slide-subtitle">
-                                        Available on all digital stream platform or buy this track via Bandcamp
-                                    </p>
-                                    <div class="owl-slide-animated owl-slide-cta"><a class="btn_1" target="_blank" href="listing-grid-1-full.html" role="button">Stream Now</a></div>
+            @foreach ($banner as $bn)
+                <div class="owl-slide cover" style="background-image: url({{ asset('assets/img/banner/'.$bn->img_banner) }});">
+                    <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+                        <div class="container">
+                            <div class="row justify-content-center justify-content-md-end">
+                                <div class="col-lg-6 static">
+                                    <div class="slide-text text-end white">
+                                        <h2 class="owl-slide-animated owl-slide-title">{{ $bn->tagline }}</h2>
+                                        <p class="owl-slide-animated owl-slide-subtitle">
+                                            {{ $bn->sub_tagline }}
+                                        </p>
+                                        <div class="owl-slide-animated owl-slide-cta"><a class="btn_1" target="_blank" href="{{ $bn->link }}" role="button">Go to link</a></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
             <!--/owl-slide-->
-            <div class="owl-slide cover" style="background-image: url({{ asset('assets/img/banner2.png') }});">
+            {{-- <div class="owl-slide cover" style="background-image: url({{ asset('assets/img/banner2.png') }});">
                 <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
                     <div class="container">
                         <div class="row justify-content-center justify-content-md-start">
@@ -35,9 +37,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!--/owl-slide-->
-            <div class="owl-slide cover" style="background-image: url({{ asset('assets/img/banner3.png') }});">
+            {{-- <div class="owl-slide cover" style="background-image: url({{ asset('assets/img/banner3.png') }});">
                 <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(255, 255, 255, 0.5)">
                     <div class="container">
                         <div class="row justify-content-center justify-content-md-start">
@@ -52,7 +54,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <!--/owl-slide-->
             </div>
         </div>

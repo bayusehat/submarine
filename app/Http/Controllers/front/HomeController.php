@@ -5,13 +5,15 @@ namespace App\Http\Controllers\front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Roster;
+use App\Models\Banner;
 
 class HomeController extends Controller
 {
     public function index(){
         $data = [
             'title' => 'Home',
-            'content' => 'front.home'
+            'content' => 'front.home',
+            'banner' => Banner::all()
         ];
 
         return view('front.index',['data' => $data]);

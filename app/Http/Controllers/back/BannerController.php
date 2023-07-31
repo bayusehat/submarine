@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Banner;
 use Validator;
+use DataTables;
 
 class BannerController extends Controller
 {
@@ -18,7 +19,7 @@ class BannerController extends Controller
         return view('back.index',['data' => $data]);
     }
 
-    public function loadBanner(){
+    public function loadBanner(Request $request){
         if ($request->ajax()) {
             $data = Banner::all();
             return Datatables::of($data)
@@ -29,7 +30,7 @@ class BannerController extends Controller
                     <div class="btn-group mr-2" role="group" aria-label="First group">
                     <a href="javascript:void(0)" class="btn btn-success btn-sm btn-block po" data-imgsrc="'.asset('assets/img/banner/'.$row->id_banner).'"><i class="fas fa-image"></i></a>
                     <a href="'.url('/banner/edit/'.$row->id_banner).'" class="btn btn-primary btn-sm btn-block"><i class="fas fa-edit"></i></a>
-                    <a href="javascript:void(0)" class="btn btn-danger btn-sm btn-block" onclick="deleteBAnner('.$row->id_banner.')"><i class="fas fa-trash"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-danger btn-sm btn-block" onclick="deleteBanner('.$row->id_banner.')"><i class="fas fa-trash"></i></a>
                     </div>';
                     return $actionBtn;
                 })
@@ -92,10 +93,10 @@ class BannerController extends Controller
             'content' => 'back.banner_edit',
             'banner' => Banner::find($id)
         ];
-        return view('back.banner',['data' => $data]);
+        return view('back.index',['data' => $data]);
     }
 
-    public function update(Rquest $request, $id){
+    public function update(Request $request, $id){
         $rs = Banner::find($id);
         $rules = [
             'tagline' => 'required',
@@ -107,6 +108,7 @@ class BannerController extends Controller
         if($isValid->fails()){
             return redirect()->back()->withErrors($isValid->errors());
         }else{
+            $realPhoto = '';
             if($rs->roster_photo == 'dummy.jpg'){
                 $rulesUpload = [
                     'img_banner' => 'required|mimes:jpeg,png|dimensions:min_width=1000,min_height=1000',
@@ -117,22 +119,26 @@ class BannerController extends Controller
                 }
                 $photo = $request->file('img_banner');
                 if($request->has('img_banner')){
-                    $realPhoto = $photo->getClientOriginalName();
+                    $realPhoto .= $photo->getClientOriginalName();
                 }else{
-                    $realPhoto = 'dummy.jpg';
+                    $realPhoto .= 'dummy.jpg';
                 }
             }
 
-            $rs = new Banner;
+            $rs = Banner::find($id);
             $rs->tagline = $request->input('tagline');
-            $rs->img_banner = $realPhoto;
+            if($realPhoto != ''){
+                $rs->img_banner = $realPhoto;
+            }
             $rs->sub_tagline = $request->input('sub_tagline');
             $rs->link = $request->input('link');
             $rs->status_banner = 0;
             $rs->position = 0;
             if($rs->save()){
                 if($realPhoto != 'dummy.jpg'){
-                    $photo->move(public_path('/assets/img/banner'),$realPhoto);
+                    if($realPhoto != ''){
+                        $photo->move(public_path('/assets/img/banner'),$realPhoto);
+                    }
                     return redirect()->back()->with('success','Banner updated!');
                 }else{
                     return redirect()->back()->with('failed','Failed upload Banner Photo!');
@@ -146,6 +152,7 @@ class BannerController extends Controller
     public function deleteBanner($id){
         $rs = Banner::find($id);
         if($rs->delete()){
+            // unlink(public_path('/assets/img/banner').$rs->img_banner);
             return response(['status' => 'success', 'message' => 'Banner deleted'], 200);
         }else{
             return response(['status' => 'failed', 'message' => 'Failed to delete Banner'], 400);
