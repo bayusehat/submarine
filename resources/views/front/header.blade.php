@@ -31,7 +31,12 @@
 
     <!-- YOUR CUSTOM CSS -->
     <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
-
+    <style>
+        .bw{
+            filter: grayscale(100%);
+            -webkit-filter: grayscale(100%);
+        }
+    </style>
 </head>
 
 <body>

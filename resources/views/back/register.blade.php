@@ -19,17 +19,10 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="">
     <meta property="og:image" content="">
-
-    <!-- Icons -->
-    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
     <link rel="shortcut icon" href="{{ asset('assets/img/icon.png') }}" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/img/icon.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/icon.png') }}">
     <link rel="stylesheet" id="css-main" href="{{ asset('assets_back/css/codebase.min.css') }}">
-
-    <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
-    <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
-    <!-- END Stylesheets -->
   </head>
 
   <body>
@@ -175,22 +168,9 @@
       <!-- END Main Container -->
     </div>
     <!-- END Page Container -->
-
-    <!--
-        Codebase JS
-
-        Core libraries and functionality
-        webpack is putting everything together at assets/_js/main/app.js
-    -->
     <script src="{{ asset('assets_back/js/codebase.app.min.js') }}"></script>
-
-    <!-- jQuery (required for Select2 + jQuery Validation plugins) -->
     <script src="{{ asset('assets_back/js/lib/jquery.min.js') }}"></script>
-
-    <!-- Page JS Plugins -->
     <script src="{{ asset('assets_back/js/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
-
-    <!-- Page JS Code -->
     <script src="{{ asset('assets_back/js/pages/op_auth_signin.min.js') }}"></script>
   </body>
 </html>

@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-lg-9">
                 <div class="singlepost">
-                    <figure><img alt="" class="img-fluid" src="{{ asset('assets/img/roster/'.$roster->roster_photo) }}"></figure>
+                    <figure><img alt="" class="img-fluid bw" src="{{ asset('assets/img/roster/'.$roster->roster_photo) }}"></figure>
                     <h1>{{ $roster->name }}</h1>
                     <div class="mb-3">
                         <ul class="list-group list-group-horizontal list-blog-custom">

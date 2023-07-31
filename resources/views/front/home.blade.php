@@ -2,7 +2,7 @@
     <div id="carousel-home">
         <div class="owl-carousel owl-theme">
             @foreach ($banner as $bn)
-                <div class="owl-slide cover" style="background-image: url({{ asset('assets/img/banner/'.$bn->img_banner) }});">
+                <div class="owl-slide cover" style="background-image: url({{ asset('assets/img/banner/'.$bn->img_banner) }});filter: grayscale(100%);-webkit-filter: grayscale(100%);">
                     <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
                         <div class="container">
                             <div class="row justify-content-center justify-content-md-end">
@@ -65,7 +65,7 @@
     <ul id="banners_grid" class="clearfix">
         <li>
             <a href="#0" class="img_container">
-                <img src="{{ asset('assets/img/releases.png') }}" data-src="{{ asset('assets/img/releases.png') }}" alt="" class="lazy">
+                <img src="{{ asset('assets/img/releases.png') }}" data-src="{{ asset('assets/img/releases.png') }}" alt="" class="lazy bw">
                 <div class="short_info opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.5)">
                     <h3>Releases</h3>
                     <div><span class="btn_1">Shop Now</span></div>
@@ -74,7 +74,7 @@
         </li>
         <li>
             <a href="#0" class="img_container">
-                <img src="{{ asset('assets/img/apparel.png') }}" data-src="{{ asset('assets/img/apparel.png') }}" alt="" class="lazy">
+                <img src="{{ asset('assets/img/apparel.png') }}" data-src="{{ asset('assets/img/apparel.png') }}" alt="" class="lazy bw">
                 <div class="short_info opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.5)">
                     <h3>Apparel</h3>
                     <div><span class="btn_1">Shop Now</span></div>
@@ -83,7 +83,7 @@
         </li>
         <li>
             <a href="{{ url('artists') }}" class="img_container">
-                <img src="{{ asset('assets/img/artists.png') }}" data-src="{{ asset('assets/img/artists.png') }}" alt="" class="lazy">
+                <img src="{{ asset('assets/img/artists.png') }}" data-src="{{ asset('assets/img/artists.png') }}" alt="" class="lazy bw">
                 <div class="short_info opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.5)">
                     <h3>Artists</h3>
                     <div><span class="btn_1">Collection</span></div>
