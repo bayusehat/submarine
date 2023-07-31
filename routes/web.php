@@ -49,4 +49,14 @@ Route::middleware(['user-access'])->group(function () {
     Route::get('/roster/remove/image/{id}','App\Http\Controllers\back\RosterController@removePhoto');
     Route::post('/roster/update/{id}','App\Http\Controllers\back\RosterController@updateRoster');
     Route::get('/roster/delete/{id}','App\Http\Controllers\back\RosterController@deleteRoster');
+
+    Route::get('/banner','App\Http\Controllers\back\BannerController@index');
+    Route::get('/banner/load','App\Http\Controllers\back\BannerController@loadBanner');
+    Route::get('/banner/create','App\Http\Controllers\back\BannerController@create');
+    Route::post('/banner/insert','App\Http\Controllers\back\BannerController@insert');
+    Route::get('/banner/edit/{id}','App\Http\Controllers\back\BannerController@edit');
+    Route::post('/banner/update/{id}','App\Http\Controllers\back\BannerController@update');
+    Route::get('/banner/delete/{id}','App\Http\Controllers\back\BannerController@destroy');
+    Route::get('/banner/active/{id}','App\Http\Controllers\back\BannerController@active');
+    Route::get('/banner/priority/{id}','App\Http\Contollers\back\BannerController@priority');
 });
