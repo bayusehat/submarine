@@ -5,7 +5,7 @@
                 <h3 data-bs-target="#collapse_1">Quick Links</h3>
                 <div class="collapse dont-collapse-sm links" id="collapse_1">
                     <ul>
-                        <li><a href="about.html">Under construction</a></li>
+                        <li><a href="#">Under construction</a></li>
                         {{-- <li><a href="help.html">Faq</a></li>
                         <li><a href="help.html">Help</a></li>
                         <li><a href="account.html">My account</a></li>
@@ -18,9 +18,9 @@
                 <h3 data-bs-target="#collapse_2">Categories</h3>
                 <div class="collapse dont-collapse-sm links" id="collapse_2">
                     <ul>
-                        <li><a href="listing-grid-1-full.html">Releases</a></li>
-                        <li><a href="listing-grid-2-full.html">Apparel</a></li>
-                        <li><a href="listing-grid-1-full.html">Artists</a></li>
+                        <li><a href="#">Releases</a></li>
+                        <li><a href="#">Apparel</a></li>
+                        <li><a href="{{ url('artists') }}">Artists</a></li>
                         {{-- <li><a href="listing-grid-3.html">Glasses</a></li>
                         <li><a href="listing-grid-1-full.html">Shoes</a></li>
                         <li><a href="listing-grid-1-full.html">Watches</a></li> --}}
