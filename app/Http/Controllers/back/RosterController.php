@@ -30,6 +30,7 @@ class RosterController extends Controller
                     <div class="btn-group mr-2" role="group" aria-label="First group">
                     <a href="javascript:void(0)" class="btn btn-success btn-sm btn-block po" data-imgsrc="'.asset('assets/img/roster/'.$row->roster_photo).'"><i class="fas fa-image"></i></a>
                     <a href="'.url('/roster/edit/'.$row->id_roster).'" class="btn btn-primary btn-sm btn-block"><i class="fas fa-edit"></i></a>
+                    <a href="'.url('/release/add/'.$row->id_roster).'" class="btn btn-primary btn-sm btn-block"><i class="fas fa-compact-disc"></i></a>
                     <a href="javascript:void(0)" class="btn btn-danger btn-sm btn-block" onclick="deleteRoster('.$row->id_roster.')"><i class="fas fa-trash"></i></a>
                     </div>';
                     return $actionBtn;

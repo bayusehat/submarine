@@ -12,19 +12,7 @@
                   <div class="row">
                     <div class="col-lg-8 space-y-2">
                       <!-- Form Inline - Default Style -->
-                      <form class="row row-cols-lg-auto g-3 align-items-center" method="POST" onsubmit="return false;">
-                        <div class="col-12">
-                          <label class="visually-hidden" for="example-if-email">Genre</label>
-                          <input type="text" class="form-control" id="genre" name="genre" placeholder="Genre">
-                          <small class="text-danger" id="notif_genre"></small>
-                        </div>
-                        <div class="col-12">
-                           <button class="btn btn-primary btn-block" id="btnCreate" onclick="create()">CREATE</button>
-                           <button class="btn btn-success btn-block" id="btnRefresh" onclick="cancel()"><i class="fas fa-refresh"></i></button>
-                           <button class="btn btn-warning btn-block" id="btnUpdate" onclick="update()">UPDATE</button>
-                           <button class="btn btn-danger btn-block" id="btnCancel" onclick="cancel()">CANCEL</button>
-                        </div>
-                      </form>
+                      <a href="{{ url('release/create') }}" class="btn btn-success"><i class="fas fa-plus"></i> Create</a>
                       <!-- END Form Inline - Default Style -->
                     </div>
                   </div>
@@ -45,7 +33,10 @@
                             <thead>
                               <tr>
                                 <th>No</th>
-                                <th>Genre</th>
+                                <th>Release Name</th>
+                                <th>Type</th>
+                                <th>Release Date</th>
+                                <th>Artist</th>
                                 <th>Action</th>
                               </tr>
                             </thead>
@@ -77,11 +68,14 @@
             destroy: true,
             paging: true,
             ajax: {
-                url: '{{ url("genre/load") }}'
+                url: '{{ url("release/load") }}'
             },
             columns: [
                 { name: 'DT_RowIndex', data: 'DT_RowIndex', orderable: false, searchable: false },
-                { name: 'genre', data: 'genre'},
+                { name: 'title', data: 'title'},
+                { name: 'release_type', data: 'release_type'},
+                { name: 'release_date', data: 'releaseDate'},
+                { name: 'artist', data: 'artist'},
                 { name: 'action' , data: 'action'}
             ],
             lengthMenu: [10,50,-1],

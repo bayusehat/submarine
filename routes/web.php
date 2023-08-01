@@ -60,4 +60,9 @@ Route::middleware(['user-access'])->group(function () {
     Route::get('/banner/active/{id}','App\Http\Controllers\back\BannerController@active');
     Route::get('/banner/priority/{id}','App\Http\Contollers\back\BannerController@priority');
     Route::get('/banner/remove/image/{id}','App\Http\Controllers\back\BannerController@removePhoto');
+
+    Route::get('/release','App\Http\Controllers\back\ReleaseController@release_index');
+    Route::get('/release/load','App\Http\Controllers\back\ReleaseController@loadRelease');
+    Route::get('/release/create','App\Http\Controllers\back\ReleaseController@createRelease');
+    Route::post('/release/insert','App\Http\Controllers\back\ReleaseController@insertRelease');
 });

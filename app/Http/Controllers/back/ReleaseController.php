@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Release;
 use App\Models\ReleaseType;
 use Validator;
+use DataTables;
+use App\Models\Roster;
 
 class ReleaseController extends Controller
 {
@@ -89,6 +91,15 @@ class ReleaseController extends Controller
             $data = Release::with('release_image','release_type','roster')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
+                ->addColumn('release_type',function($row){
+                    return $row->release_type->release_type;
+                })
+                ->addColumn('artist',function($row){
+                    return $row->roster->name;
+                })
+                ->addColumn('releaseDate',function($row){
+                    return date('d-m-Y', strtotime($row->release_date));
+                })
                 ->addColumn('action', function($row){
                     $actionBtn = '<a href="javascript:void(0)" class="btn btn-primary btn-sm" onclick="edit('.$row->id_release.')">Edit</a> <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="deleteGenre('.$row->ir_release.')">Delete</a>';
                     return $actionBtn;
@@ -98,7 +109,17 @@ class ReleaseController extends Controller
         }
     }
 
-    public function createRelease(Request $request){
+    public function createRelease(){
+        $data = [
+            'title' => 'Create mew Release',
+            'content' => 'back.release_create',
+            'roster' => Roster::all()
+        ];
+
+        return view('back.index',['data' => $data]);
+    }
+
+    public function insertRelease(Request $request){
         $error_upload = [];
         $rules = [
             'roster' => 'required',
@@ -127,9 +148,9 @@ class ReleaseController extends Controller
                         $name = $request->input('title').$request->input('release_date').$f->getClientOriginalName();
                         $rim = new ReleaseImage;
                         $rim->release_image = $name;
-                        $rim->release_path_image = '/release/image/'.$name;
+                        $rim->release_path_image = '/assets/img/release'.$name;
                         if($rim->save()){
-                            $rim->move(public_path('/release/image/'),$name);
+                            $rim->move(public_path('/assets/img/release'),$name);
                         }else{
                             $error_upload[] = 'Error '.[$img];
                         }
