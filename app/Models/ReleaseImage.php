@@ -20,7 +20,7 @@ class ReleaseImage extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function release(): BelongsTo
+    public function release()
     {
         return $this->belongsTo('App\Models\Release', 'id_release', 'id_release');
     }

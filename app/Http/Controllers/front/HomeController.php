@@ -30,7 +30,7 @@ class HomeController extends Controller
     }
 
     public function artist_detail($name){
-        $rs = Roster::with('release.release_type')->where('name',$name)->first();
+        $rs = Roster::with('release.release_type','release.release_image')->where('name',$name)->first();
         $data = [
             'title' => 'About '.$rs->name,
             'content' => 'front.artist_detail',

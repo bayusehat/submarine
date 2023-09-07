@@ -20,7 +20,7 @@ class Release extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function roster(): BelongsTo
+    public function roster()
     {
         return $this->belongsTo('App\Models\Roster', 'id_roster', 'id_roster');
     }
@@ -30,7 +30,7 @@ class Release extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function release_image(): HasMany
+    public function release_image()
     {
         return $this->hasMany('App\Models\ReleaseImage', 'id_release', 'id_release');
     }
@@ -40,8 +40,14 @@ class Release extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function release_type(): BelongsTo
+    public function release_type()
     {
         return $this->belongsTo('App\Models\ReleaseType', 'id_release_type', 'id_release_type');
     }
+
+    /**
+     * Get the roster that owns the Release
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
 }

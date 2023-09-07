@@ -74,7 +74,7 @@
                 { name: 'DT_RowIndex', data: 'DT_RowIndex', orderable: false, searchable: false },
                 { name: 'title', data: 'title'},
                 { name: 'release_type', data: 'release_type'},
-                { name: 'release_date', data: 'releaseDate'},
+                { name: 'release_date', data: 'release_date'},
                 { name: 'artist', data: 'artist'},
                 { name: 'action' , data: 'action'}
             ],

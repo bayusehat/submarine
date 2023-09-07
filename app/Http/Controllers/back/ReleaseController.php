@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Release;
 use App\Models\ReleaseType;
+use App\Models\ReleaseImage;
 use Validator;
 use DataTables;
 use App\Models\Roster;
@@ -88,7 +89,7 @@ class ReleaseController extends Controller
 
     public function loadRelease(Request $request){
         if ($request->ajax()) {
-            $data = Release::with('release_image','release_type','roster')->get();
+            $data = Release::with('release_image')->with('release_type')->with('roster')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('release_type',function($row){
@@ -97,7 +98,7 @@ class ReleaseController extends Controller
                 ->addColumn('artist',function($row){
                     return $row->roster->name;
                 })
-                ->addColumn('releaseDate',function($row){
+                ->addColumn('release_date',function($row){
                     return date('d-m-Y', strtotime($row->release_date));
                 })
                 ->addColumn('action', function($row){
@@ -111,7 +112,7 @@ class ReleaseController extends Controller
 
     public function createRelease(){
         $data = [
-            'title' => 'Create mew Release',
+            'title' => 'Create new Release',
             'content' => 'back.release_create',
             'roster' => Roster::all()
         ];
@@ -120,13 +121,12 @@ class ReleaseController extends Controller
     }
 
     public function insertRelease(Request $request){
-        $error_upload = [];
         $rules = [
             'roster' => 'required',
             'title' => 'required',
-            'description' => 'required|min:100',
+            'description' => 'required|min:10',
             'price' => 'required|numeric',
-            'relase_date' => 'required',
+            'release_date' => 'required',
             'release_type' => 'required'
         ];
 
@@ -135,6 +135,13 @@ class ReleaseController extends Controller
         if($isValid->fails()){
             return redirect()->back()->withErrors($isValid->errors());
         }else{
+            $photo = $request->file('release_image');
+            if($request->has('release_image')){
+                $realPhoto = $photo->getClientOriginalName();
+            }else{
+                $realPhoto = 'dummy.jpg';
+            }
+
             $rl = new Release;
             $rl->title = $request->input('title');
             $rl->description = $request->input('description');
@@ -143,18 +150,16 @@ class ReleaseController extends Controller
             $rl->price = $request->input('price');
             $rl->release_date = $request->input('release_date');
             if($rl->save()){
-                if($request->file('release_image')){
-                    foreach ($request->file('release_image') as $img => $ri) {
-                        $name = $request->input('title').$request->input('release_date').$f->getClientOriginalName();
-                        $rim = new ReleaseImage;
-                        $rim->release_image = $name;
-                        $rim->release_path_image = '/assets/img/release'.$name;
-                        if($rim->save()){
-                            $rim->move(public_path('/assets/img/release'),$name);
-                        }else{
-                            $error_upload[] = 'Error '.[$img];
-                        }
-                    }
+                if($realPhoto != 'dummy.jpg'){
+                    $photo->move(public_path('/assets/img/release'),$realPhoto);
+                    $ri = new ReleaseImage;
+                    $ri->id_release = $rl->id_release;
+                    $ri->file_name = $realPhoto;
+                    $ri->upload_date = date('Y-m-d H:i:s');
+                    $ri->save();
+                    return redirect()->back()->with('success','New Release created!');
+                }else{
+                    return redirect()->back()->with('failed','Failed upload Roster Photo!');
                 }
                 return redirect()->back()->with(['success' => 'New release created!', 'error_upload' => $error_upload]);
             }else{

@@ -21,7 +21,7 @@ class Roster extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function release(): HasMany
+    public function release()
     {
         return $this->hasMany('App\Models\Release', 'id_roster', 'id_roster');
     }

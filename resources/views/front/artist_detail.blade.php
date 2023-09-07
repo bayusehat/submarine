@@ -161,7 +161,7 @@
                         @foreach ($roster->release as $ir)
                              <li>
                                 <div class="alignleft">
-                                    <a href="#0"><img src="{{ asset('assets/img/roster/dummy.jpg') }}" alt=""></a>
+                                    <a href="#0"><img src="{{ asset('assets/img/release/'.$ir->release_image[0]->file_name) }}" alt="" class="img-fluid img-responsive"></a>
                                 </div>
                                 <small>{{ $ir->release_type->release_type }} - {{ date('d M Y', strtotime($ir->release_date)) }}</small>
                                 <h3><a href="#" title="">{{ $ir->title }}</a></h3>

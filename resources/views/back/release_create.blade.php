@@ -64,7 +64,7 @@
                                     @error('release_type') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="form-floating mb-4">
-                                    <input type="file" name="release_image[]" id="release_image" class="form-control" placeholder="Release Photo" multiple>
+                                    <input type="file" name="release_image" id="release_image" class="form-control" onchange="document.getElementById('release_photo_view').src = window.URL.createObjectURL(this.files[0])" placeholder="Release Photo" multiple>
                                     <label class="form-label" for="roster_photo">Photo</label>
                                     @error('release_image') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
@@ -94,12 +94,17 @@
                                     @error('release_date') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="form-floating mt-4">
-                                   <input type="submit" name="submit" id="submit" class="btn btn-success" value="Create new Roster">
+                                   <input type="submit" name="submit" id="submit" class="btn btn-success" value="Create new Release">
                                 </div>
                             </form>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 space-y-2">
-
+                            <img src="" id="release_photo_view" alt="" class="img-fluid img-responsive">
+                            {{-- @if ($roster->roster_photo != 'dummy.jpg')
+                                <a href="javascript:void(0)" class="btn btn-danger btn-sm text-center" onclick="removePhoto({{ $roster->id_roster }})"><i class="fas fa-times"></i> Hapus Foto</a>
+                            @else --}}
+                                {{-- <a href="javascript:void(0)" class="btn btn-primary btn-sm text-center" onclick="updatePhoto({{ $roster->id_roster }})"><i class="fas fa-upload"></i> Upload Foto</a> --}}
+                            {{-- @endif --}}
                         </div>
                       </div>
                     </div>
@@ -110,5 +115,12 @@
     </main>
   <!-- END Main Container -->
   <script>
-
+    // var imgInp = $("#release_image");
+    // var idPreview = $("#release_photo_view");
+    // imgInp.onchange = evt => {
+    // const [file] = imgInp.files
+    //     if (file) {
+    //         idPreview.src = URL.createObjectURL(file)
+    //     }
+    // }
   </script>

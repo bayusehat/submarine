@@ -58,7 +58,7 @@ Route::middleware(['user-access'])->group(function () {
     Route::post('/banner/update/{id}','App\Http\Controllers\back\BannerController@update');
     Route::get('/banner/delete/{id}','App\Http\Controllers\back\BannerController@deleteBanner');
     Route::get('/banner/active/{id}','App\Http\Controllers\back\BannerController@active');
-    Route::get('/banner/priority/{id}','App\Http\Contollers\back\BannerController@priority');
+    Route::get('/banner/priority/{id}','App\Http\Controllers\back\BannerController@priority');
     Route::get('/banner/remove/image/{id}','App\Http\Controllers\back\BannerController@removePhoto');
 
     Route::get('/release','App\Http\Controllers\back\ReleaseController@release_index');
