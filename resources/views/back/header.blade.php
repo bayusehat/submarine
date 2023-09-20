@@ -258,6 +258,11 @@
                             <span class="nav-main-link-name">Banner</span>
                         </a>
                     </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ url('/invoice') }}">
+                            <span class="nav-main-link-name">Invoice</span>
+                        </a>
+                    </li>
                     {{-- <li class="nav-main-item">
                       <a class="nav-main-link" href="">
                         <span class="nav-main-link-name">Manage</span>

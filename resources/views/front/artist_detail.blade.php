@@ -154,9 +154,9 @@
                 </div>
                 <!-- /widget -->
                 <div class="widget">
-                    <div class="widget-title">
+                    {{-- <div class="widget-title">
                         <h4>Discography</h4>
-                    </div>
+                    </div> --}}
                     <ul class="comments-list">
                         @foreach ($roster->release as $ir)
                              <li>

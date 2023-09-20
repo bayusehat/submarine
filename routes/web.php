@@ -65,4 +65,8 @@ Route::middleware(['user-access'])->group(function () {
     Route::get('/release/load','App\Http\Controllers\back\ReleaseController@loadRelease');
     Route::get('/release/create','App\Http\Controllers\back\ReleaseController@createRelease');
     Route::post('/release/insert','App\Http\Controllers\back\ReleaseController@insertRelease');
+
+    Route::get('/invoice','App\Http\Controllers\InvoiceController@index');
+    Route::get('/invoice/load','App\Http\Controllers\InvoiceController@loadInvoice');
+    Route::get('/invoice/create','App\Http\Controllers\InvoiceController@create');
 });
