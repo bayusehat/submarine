@@ -17,9 +17,9 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>
                                 @endif
-                                @if(session('failed'))
+                                @if(session('error'))
                                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                        <strong>Failed!</strong> {{ Session::get('failed')}}
+                                        <strong>Failed!</strong> {{ Session::get('error')}}
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>
                                 @endif
@@ -30,44 +30,124 @@
                             <form method="post" action="{{ url('invoice/insert') }}" id="formCreate" enctype="multipart/form-data"
                             class="row gx-3 gy-2 align-items-center">
                             @csrf
-                            <div class="col-sm-3">
-                                    <label class="visually-hidden" for="specificSizeInputName">Name</label>
-                                    <input type="text" class="form-control" id="specificSizeInputName" placeholder="Jane Doe">
+                                <div class="col-sm-3">
+                                    <label for="specificSizeInputName">Name</label>
+                                    <input type="text" name="invoice_to" class="form-control" id="invoice_to" placeholder="Jane Doe">
                                 </div>
                                 <div class="col-sm-3">
-                                    <label class="visually-hidden" for="specificSizeInputGroupUsername">Username</label>
-                                    <div class="input-group">
-                                    <div class="input-group-text">@</div>
-                                    <input type="text" class="form-control" id="specificSizeInputGroupUsername" placeholder="Username">
-                                    </div>
+                                    <label for="specificSizeInputGroupUsername">Contact Person</label>
+                                    {{-- <div class="input-group">
+                                    <div class="input-group-text">@</div> --}}
+                                    <input type="text" name="invoice_cp" class="form-control" id="invoice_cp" placeholder="0895364791632">
+                                    {{-- </div> --}}
                                 </div>
                                 <div class="col-sm-3">
-                                    <label class="visually-hidden" for="specificSizeSelect">Preference</label>
-                                    <select class="form-select" id="specificSizeSelect">
-                                    <option selected>Choose...</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                    </select>
+                                    <label for="specificSizeInputName">Invoice Date</label>
+                                    <input type="date" name="invoice_date" class="form-control" id="invoice_date" placeholder="Fill the date">
                                 </div>
-                                <div class="col-auto">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="autoSizingCheck2">
-                                        <label class="form-check-label" for="autoSizingCheck2">
-                                            Remember me
-                                        </label>
+                                <div class="col-sm-3">
+                                    <label for="specificSizeInputName">Invoice E-mail</label>
+                                    <input type="date" name="invoice_email" class="form-control" id="invoice_email" placeholder="business@mail.com">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="specificSizeInputName">Description</label>
+                                    <textarea name="invoice_description" id="invoice_description" class="form-control" ></textarea>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="specificSizeInputName">Address</label>
+                                    <textarea name="invoice_address" id="invoice_address" class="form-control"></textarea>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="specificSizeInputName"><strong>Amount</strong></label>
+                                    <input type="text" name="invoice_amount" class="form-control" id="invoice_amount" placeholder="" readonly>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="specificSizeInputName"><strong>Total</strong></label>
+                                    <input type="text" name="invoice_total" class="form-control" id="invoice_total" placeholder="" readonly>
+                                </div>
+                                <hr>
+                                <div class="list">
+                                    <table class="table table-responsive table-bordered" id="tableItem">
+                                        <thead>
+                                            <tr>
+                                                <th>Item</th>
+                                                <th>Note</th>
+                                                <th>Quantity</th>
+                                                <th>Price</th>
+                                                <th>Subtotal</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tableContent">
+
+                                        </tbody>
+                                    </table>
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <button type="button" class="btn btn-info me-md-2" class="btnAddItem" id="btnAddItem"onclick="addItem()"><i class="fas fa-plus"></i> Add new Item</button>
+                                        <input type="submit" class="btn btn-success me-md-2" value="Generate Invoice">
                                     </div>
                                 </div>
                             </form>
                         </div>
-                      </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- END Page Content -->
-    </main>
-  <!-- END Main Container -->
-  <script>
+    </div>
+    <!-- END Page Content -->
+</main>
+<!-- END Main Container -->
+<script>
+    function addItem(){
+    var list = '<tr>'+
+                '<td><input type="text" name="item[]" class="form-control"></td>'+
+                '<td><input type="text" name="note[]" class="form-control"></td>'+
+                '<td><input type="number" name="quantity[]" onchange="change_qty()" class="form-control quantity" min="1"></td>'+
+                '<td><input type="text" name="price[]" onchange="change_price()" class="form-control price"></td>'+
+                '<td><input type="text" name="subtotal[]" class="form-control subtotal" readonly></td>'+
+                '<td><button type="button" class="btn btn-danger actionBtn"><i class="fas fa-trash"></i></button></td>'+
+        '</tr>';
+    $("#tableContent").append(list);
+    }
 
-  </script>
+    $("#tableItem").on('click', '.actionBtn', function() {
+        $(this).closest('tr').remove();
+    })
+
+    function change_qty(){
+        var sum = 0;
+    $('#tableItem > tbody  > tr').each(function() {
+        var qty = $(this).find('.quantity').val();
+        var price = $(this).find('.price').val();
+        var amount = (qty*price)
+        sum+=amount;
+        $(this).find('.subtotal').val(amount);
+        total();
+    });
+    }
+
+    function change_price(){
+        var sum = 0;
+    $('#tableItem > tbody  > tr').each(function() {
+        var qty = $(this).find('.quantity').val();
+        var price = $(this).find('.price').val();
+        var amount = (qty*price)
+        sum+=amount;
+        $(this).find('.subtotal').val(amount);
+        total();
+    });
+    }
+
+    function total(){
+        var sum = 0;
+        $(".subtotal").each(function() {
+            var value = $(this).val();
+
+            if(!isNaN(value) && value.length != 0) {
+                sum += parseFloat(value);
+            }
+        });
+        $("#invoice_total").val(sum);
+    }
+
+</script>

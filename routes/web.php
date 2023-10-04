@@ -69,4 +69,5 @@ Route::middleware(['user-access'])->group(function () {
     Route::get('/invoice','App\Http\Controllers\InvoiceController@index');
     Route::get('/invoice/load','App\Http\Controllers\InvoiceController@loadInvoice');
     Route::get('/invoice/create','App\Http\Controllers\InvoiceController@create');
+    Route::post('/invoice/insert','App\Http\Controllers\InvoiceController@insert');
 });
