@@ -67,7 +67,14 @@ class InvoiceController extends Controller
             'invoice_email' => 'required'
         ];
 
-        $isValid = Validator::make($request->all(), $rules);
+        $message = [
+            'invoice_to.required' => 'Nama penerima invoice harus diisi',
+            'invoice_cp.required' => 'Nomor Handphone penerima invoice harus diisi',
+            'invoice_date.required' => 'Tanggal invoice harus diisi',
+            'invoice_email.required' => 'E-mail penerima invoice harus diisi'
+        ];
+
+        $isValid = Validator::make($request->all(), $rules, $message);
 
         if($isValid->fails()){
              return redirect()->back()->withErrors($isValid->errors());

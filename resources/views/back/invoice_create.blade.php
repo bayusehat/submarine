@@ -33,6 +33,7 @@
                                 <div class="col-sm-3">
                                     <label for="specificSizeInputName">Name</label>
                                     <input type="text" name="invoice_to" class="form-control" id="invoice_to" placeholder="Jane Doe">
+                                    @error('invoice_to') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="specificSizeInputGroupUsername">Contact Person</label>
