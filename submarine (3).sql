@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Okt 2023 pada 09.45
+-- Waktu pembuatan: 25 Okt 2023 pada 11.16
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 8.1.12
 
@@ -431,7 +431,14 @@ INSERT INTO `ticket_orders` (`id_ticket`, `no_ticket`, `id_user`, `customer_name
 (77, '2310250609-24/1', 2, 'Silvia', '085236118086', 'EARLY BIRD', 1, 'NOT CHECKED', '2023-10-25', '2023-10-24 23:09:24', '2023-10-24 23:09:24', NULL),
 (78, '2310250610-33/2', 2, 'ianjembret', '087821135052', 'EARLY BIRD', 1, 'NOT CHECKED', '2023-10-25', '2023-10-24 23:10:33', '2023-10-24 23:10:33', NULL),
 (79, '2310250610-45/3', 2, 'ianjembret', '087821135052', 'EARLY BIRD', 1, 'NOT CHECKED', '2023-10-25', '2023-10-24 23:10:45', '2023-10-24 23:10:45', NULL),
-(80, '2310250744-21/0', 2, 'M. Rizqy Ifaldhi Putra', '082301573954', 'EARLY BIRD', 1, 'NOT CHECKED', '2023-10-25', '2023-10-25 00:44:21', '2023-10-25 00:44:21', NULL);
+(80, '2310250744-21/0', 2, 'M. Rizqy Ifaldhi Putra', '082301573954', 'EARLY BIRD', 1, 'NOT CHECKED', '2023-10-25', '2023-10-25 00:44:21', '2023-10-25 00:44:21', NULL),
+(81, '2310250848-21/1', 2, 'Aditya Firdaus', '085236688525', 'EARLY BIRD', 1, 'NOT CHECKED', '2023-10-25', '2023-10-25 01:48:21', '2023-10-25 01:48:21', NULL),
+(82, '2310250848-37/3', 2, 'Aditya Firdaus', '085236688525', 'EARLY BIRD', 1, 'NOT CHECKED', '2023-10-25', '2023-10-25 01:48:37', '2023-10-25 01:48:37', NULL),
+(83, '2310250848-46/3', 2, 'Aditya Firdaus', '085236688525', 'EARLY BIRD', 1, 'NOT CHECKED', '2023-10-25', '2023-10-25 01:48:46', '2023-10-25 01:48:46', NULL),
+(84, '2310250909-15/1', 2, 'Adeliya', '089621454832', 'EARLY BIRD', 1, 'NOT CHECKED', '2023-10-25', '2023-10-25 02:09:15', '2023-10-25 02:09:15', NULL),
+(85, '2310250913-37/2', 2, 'Muhammad Afif', '085780348097', 'EARLY BIRD', 1, 'NOT CHECKED', '2023-10-25', '2023-10-25 02:13:37', '2023-10-25 02:13:37', NULL),
+(86, '2310250913-51/0', 2, 'Muhammad Afif', '085780348097', 'EARLY BIRD', 1, 'NOT CHECKED', '2023-10-25', '2023-10-25 02:13:51', '2023-10-25 02:13:51', NULL),
+(87, '2310250914-00/2', 2, 'Muhammad Afif', '085780348097', 'EARLY BIRD', 1, 'NOT CHECKED', '2023-10-25', '2023-10-25 02:14:00', '2023-10-25 02:14:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -668,7 +675,7 @@ ALTER TABLE `rosters`
 -- AUTO_INCREMENT untuk tabel `ticket_orders`
 --
 ALTER TABLE `ticket_orders`
-  MODIFY `id_ticket` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id_ticket` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT untuk tabel `tracks`
