@@ -29,6 +29,19 @@ class TicketController extends Controller
                     $date = date('d-m-Y',strtotime($row->order_date));
                     return $date;
                 })
+                ->addColumn('customer_name',function($row){
+                    if(strlen($row->customer_name) > 13){
+                        $subs = substr($row->customer_name,0,13).'...';
+                    }else{
+                        $subs = $row->customer_name;
+                    }
+
+                    return $subs;
+                })
+                // ->addColumn('created_date',function($row){
+                //     $date = date('d-m-Y H:i:s',strtotime($row->created_at));
+                //     return $date;
+                // })
                 ->addColumn('ticket_status',function($row){
                     if($row->ticket_status == 'CHECKED'){
                         $badge = '<span class="badge bg-success"><i class="fas fa-check"></i> '.$row->ticket_status.'</span><span class="badge bg-secondary">Updated at : '.date('d-m-y H:i',strtotime($row->updated_at)).'</span>';
@@ -38,16 +51,27 @@ class TicketController extends Controller
 
                     return $badge;
                 })
+                ->addColumn('payment_status',function($row){
+                    if($row->payment_status == 0){
+                        $badge = '<a href="javascript:void(0)" onclick="updatePayment('.$row->id_ticket.','.$row->payment_status.')"><span class="badge bg-danger"><i class="fas fa-times"></i> Not Paid</span></a>';
+                    }else{
+                        $badge = '<a href="javascript:void(0)" onclick="updatePayment('.$row->id_ticket.','.$row->payment_status.')"><span class="badge bg-success"><i class="fas fa-check"></i> Paid</span></a>';
+                    }
+
+                    return $badge;
+                    
+                })
                 ->addColumn('action', function($row){
                     $actionBtn = '
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                         <div class="btn-group mr-2" role="group" aria-label="First group">
                     <a href="'.url('/generate/'.$row->id_ticket).'" class="btn btn-success btn-sm btn-block"><i class="fas fa-file"></i></a>
+                    <a href="'.url('/prepreceipt/'.$row->id_ticket).'" class="btn btn-default btn-sm btn-block"><i class="fas fa-dollar"></i></a>
                     <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-block" onclick="edit('.$row->id_ticket.')"><i class="fas fa-edit"></i></a> <a href="javascript:void(0)" class="btn btn-danger btn-sm btn-block" onclick="delTicket('.$row->id_ticket.')"><i class="fas fa-trash"></i></a>
                     </div>';
                     return $actionBtn;
                 })
-                ->rawColumns(['action','ticket_status'])
+                ->rawColumns(['action','ticket_status','payment_status'])
                 ->make(true);
         }
     }
@@ -83,7 +107,7 @@ class TicketController extends Controller
     }
 
     public function editTicket($id_ticket){
-        $data = TicketOrder::with('user')->get();
+        $data = TicketOrder::with('user')->where('id_ticket', $id_ticket)->first();
         if($data){
             return response(['status' => 'success', 'data' => $data]);
         }
@@ -133,6 +157,30 @@ class TicketController extends Controller
     public function generate($id_ticket){
         $data = TicketOrder::with('user')->find($id_ticket);
         return view('back.ticket_generate')->with('data', $data);
+    }
+
+    public function updatePayment($id_ticket,$status){
+        $get = TicketOrder::find($id_ticket);
+        if($status == 0){
+            $updatedStatus = 1;
+        }else{
+            $updatedStatus = 0;
+        }
+
+        $up = $get->update(['payment_status' => $updatedStatus]);
+        if($up){
+            return response([
+                'status' => 'success',
+                'data' => $updatedStatus,
+                'message' => 'Payment status updated successfully!'
+            ]);
+        }else{
+            return response([
+                'status' => 'error',
+                'data' => $updatedStatus,
+                'message' => 'Error, cannot update payment status'
+            ]);
+        }
     }
 
     public function verify($id_ticket,$ticket_status){

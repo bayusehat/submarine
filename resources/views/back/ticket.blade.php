@@ -70,7 +70,7 @@
                         </div>
                       <div class="row">
                         <div class="col-lg-12 space-y-2">
-                          <table class="table table-striped table-responsive" id="tableTicket" width="100%">
+                          <table class="table table-striped table-responsive display compact" id="tableTicket" width="100%">
                             <thead>
                               <tr>
                                 <th>No</th>
@@ -79,7 +79,9 @@
                                 <th>Ticket Type</th>
                                 <th>Qty</th>
                                 <th>Status</th>
+                                <th>Payment Status</th>
                                 <th>Order Date</th>
+                                <!-- <th>Created Date</th> -->
                                 <th>Action</th>
                               </tr>
                             </thead>
@@ -115,13 +117,15 @@
                 url: '{{ url("ticket/load") }}'
             },
             columns: [
-                { name: 'DT_RowIndex', data: 'DT_RowIndex', orderable: false, searchable: false },
+                { name: 'DT_RowIndex', data: 'DT_RowIndex', searchable: false },
                 { name: 'customer_name', data: 'customer_name'},
                 { name: 'no_hp', data: 'no_hp'},
                 { name: 'ticket_type', data: 'ticket_type'},
                 { name: 'quantity', data: 'quantity'},
                 { name: 'ticket_status', data: 'ticket_status'},
+                { name: 'payment_Status', data: 'payment_status'},
                 { name: 'order_date', data: 'order_date'},
+                // { name: 'created_date', data: 'created_date'},
                 { name: 'action' , data: 'action'}
             ],
             lengthMenu: [10,50,-1],
@@ -181,6 +185,7 @@
             method : 'GET',
             dataType : 'JSON',
             success:function(e){
+                console.log(e)
                 $("#customer_name").val(e.data.customer_name).focus();
                 $("#no_hp").val(e.data.no_hp);
                 $("#quantity").val(e.data.quantity);
@@ -219,6 +224,21 @@
             url : "{{ url('ticket/delete') }}/"+id,
             method : 'GET',
             dataType : 'JSON',
+            success:function(e){
+                if(e.status == 'success'){
+                    table.ajax.reload(null,false);
+                }else{
+                    alert(e.message);
+                }
+            }
+        })
+    }
+
+    function updatePayment(id,status){
+        $.ajax({
+            url : "{{ url('ticket/payment') }}/"+id+"/"+status,
+            method : "GET",
+            dataType : "JSON",
             success:function(e){
                 if(e.status == 'success'){
                     table.ajax.reload(null,false);

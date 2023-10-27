@@ -14,6 +14,7 @@ class TicketOrder extends Model
     protected $table = 'ticket_orders';
     protected $primaryKey = 'id_ticket';
     protected $hidden = ['created_at','deleted_at'];
+    protected $fillable = ['payment_status'];
 
     public $timestamps = true;
 
