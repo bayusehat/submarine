@@ -77,7 +77,7 @@
                     </div>
                     <div class="block-content block-content-full">
                         <div class="row">
-                            <div class="col-6 mb-3 align-left">
+                            {{-- <div class="col-6 mb-3 align-left">
                                 <div class="form-group">
                                     <select name="event_choose" id="event_choose" class="form-control">
                                         <option value="">- Empty -</option>
@@ -89,7 +89,7 @@
                             </div>
                             <div class="col-3 mb-3 align-left">
                                 <a href="javascript:void(0)" class="btn btn-primary" onclick="getTicket()"><i class="fas fa-search"></i> Filter</a>
-                            </div>
+                            </div> --}}
                             <div class="col-3 mb-3 align-right">
                                 <a href="{{ url('scan') }}" class="btn btn-success float-right"><i class="fas fa-search"></i> Scanner</a>
                             </div>
@@ -133,7 +133,7 @@
     $(document).ready(function(){
         $("#btnRefresh").hide();
     });
-    function getTicket(){
+    // function getTicket(){
         var id_event = $("#event_choose").val();
         var table = new DataTable('#tableTicket',{
             processing: true,
@@ -142,7 +142,7 @@
             paging: true,
             responsive: true,
             ajax: {
-                url: '{{ url("ticket/load") }}?event='+id_event
+                url: '{{ url("ticket/load") }}'
             },
             columns: [
                 { name: 'DT_RowIndex', data: 'DT_RowIndex', searchable: false },
@@ -159,7 +159,7 @@
             lengthMenu: [10,50,-1],
             order: [[0, 'desc']],
         });
-    }
+    // }
    
 
     function cancel(){
