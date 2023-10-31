@@ -45,6 +45,16 @@
                             <small class="text-danger" id="notif_ticket_type"></small>
                         </div>
                         <div class="col-md-3 col-sm-6 col-xl-3">
+                            <label class="visually-hidden" for="example-if-email"> Event</label>
+                            <select name="id_event" id="id_event" class="form-control">
+                                <option value="">-- Choose Event--</option>
+                                @foreach ($events as $ep)
+                                    <option value="{{ $ep->id_event }}">{{ $ep->event_name }}</option>
+                                @endforeach
+                            </select>
+                            <small class="text-danger" id="notif_ticket_type"></small>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xl-3">
                            <button class="btn btn-primary btn-block" id="btnCreate" onclick="create()">CREATE</button>
                            <button class="btn btn-success btn-block" id="btnRefresh" onclick="cancel()"><i class="fas fa-refresh"></i></button>
                            <button class="btn btn-warning btn-block" id="btnUpdate" onclick="update()">UPDATE</button>
@@ -172,6 +182,7 @@
                 'quantity' : $("#quantity").val(),
                 'ticket_type' : $("#ticket_type").val(),
                 'order_date' : $("#order_date").val(),
+                'id_event' : $("#id_event").val()
             },
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -183,6 +194,7 @@
                     $("#quantity").val('');
                     $("#ticket_type").val('');
                     $("#order_date").val('');
+                    $("#id_event").val('');
                     table.ajax.reload(null,false);
                 }else if(e.status == 'errors'){
                     $.each(e.errors,function(i,a){
@@ -224,7 +236,8 @@
                 'no_hp' : $("#no_hp").val(),
                 'quantity' : $("#quantity").val(),
                 'ticket_type' : $("#ticket_type").val(),
-                'order_date' : $("#order_date").val()
+                'order_date' : $("#order_date").val(),
+                'id_event' : $("#id_event").val()
             },
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

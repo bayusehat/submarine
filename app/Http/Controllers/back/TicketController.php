@@ -104,6 +104,7 @@ class TicketController extends Controller
             $to->ticket_type = $request->input('ticket_type');
             $to->quantity = $request->input('quantity');
             $to->order_date = $request->input('order_date');
+            $to->id_event = $request->input('id_event');
             $to->id_user = session('id_user');
             if($to->save()){
                 return response(['status' => 'success','message' => 'New ticket created']);
@@ -141,6 +142,7 @@ class TicketController extends Controller
             $to->no_hp = $request->input('no_hp');
             $to->ticket_type = $request->input('ticket_type');
             $to->quantity = $request->input('quantity');
+            $to->id_event = $request->input('id_event');
             $to->order_date = $request->input('order_date');
             $to->id_user = session('id_user');
             if($to->save()){

@@ -53,7 +53,11 @@
         <div class="row mb-4">
             <div class="col-md-12 col-sm-12 col-xl-12">
                 <table id="tableTicket" style="border: 5px solid white;border-collapse: collapse;">
-                    <td><img src="{{ asset('assets_back/media/photos/logo.jpg') }}" width="100px"/></td>
+                    @if ($data->id_event == 1)
+                        <td><img src="{{ asset('assets_back/media/photos/logo-sub.png') }}" width="100px"/></td>
+                    @else
+                        <td><img src="{{ asset('assets_back/media/photos/logo.jpg') }}" width="100px"/></td>
+                    @endif
                     <td></td>
                     <td>{{ 'ID : '. $data->id_ticket.'- NO:'.$data->no_ticket }}</td>
                 </tr>
