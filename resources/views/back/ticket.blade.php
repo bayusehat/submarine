@@ -37,7 +37,9 @@
                             <label class="visually-hidden" for="example-if-email">Ticket Type</label>
                             <select name="ticket_type" id="ticket_type" class="form-control">
                                 <option value="">-- Choose Ticket Type--</option>
+                                <option value="EARLY BIRD">Early Bird</option>
                                 <option value="PRESALE">Pre-Sale</option>
+                                <option value="ON THE SPOT">On The Spot</option>
                                 <option value="BUNDLING">Bundling</option>
                             </select>
                             <small class="text-danger" id="notif_ticket_type"></small>
@@ -47,6 +49,7 @@
                            <button class="btn btn-success btn-block" id="btnRefresh" onclick="cancel()"><i class="fas fa-refresh"></i></button>
                            <button class="btn btn-warning btn-block" id="btnUpdate" onclick="update()">UPDATE</button>
                            <button class="btn btn-danger btn-block" id="btnCancel" onclick="cancel()">CANCEL</button>
+                           <a href="{{ url('/event') }}" class="btn btn-success btn-block" id="btnEvent"><i class="fas fa-home"></i> Cek Event</a>
                         </div>
                       </form>
                       <!-- END Form Inline - Default Style -->
@@ -64,8 +67,21 @@
                     </div>
                     <div class="block-content block-content-full">
                         <div class="row">
-                            <div class="col-12 mb-3 align-right">
-                                <a href="{{ url('scan') }}" class="btn btn-success"><i class="fas fa-search"></i> Scanner</a>
+                            <div class="col-6 mb-3 align-left">
+                                <div class="form-group">
+                                    <select name="event_choose" id="event_choose" class="form-control">
+                                        <option value="">- Empty -</option>
+                                        @foreach ($events as $ev)
+                                            <option value="{{ $ev->id_event}}">{{ $ev->event_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-3 mb-3 align-left">
+                                <a href="javascript:void(0)" class="btn btn-primary" onclick="getTicket()"><i class="fas fa-search"></i> Filter</a>
+                            </div>
+                            <div class="col-3 mb-3 align-right">
+                                <a href="{{ url('scan') }}" class="btn btn-success float-right"><i class="fas fa-search"></i> Scanner</a>
                             </div>
                         </div>
                       <div class="row">
@@ -81,7 +97,7 @@
                                 <th>Status</th>
                                 <th>Payment Status</th>
                                 <th>Order Date</th>
-                                <!-- <th>Created Date</th> -->
+                                <th>Event</th>
                                 <th>Action</th>
                               </tr>
                             </thead>
@@ -107,14 +123,16 @@
     $(document).ready(function(){
         $("#btnRefresh").hide();
     });
-   var table = new DataTable('#tableTicket',{
+    function getTicket(){
+        var id_event = $("#event_choose").val();
+        var table = new DataTable('#tableTicket',{
             processing: true,
             serverSide: true,
             destroy: true,
             paging: true,
             responsive: true,
             ajax: {
-                url: '{{ url("ticket/load") }}'
+                url: '{{ url("ticket/load") }}?event='+id_event
             },
             columns: [
                 { name: 'DT_RowIndex', data: 'DT_RowIndex', searchable: false },
@@ -125,12 +143,14 @@
                 { name: 'ticket_status', data: 'ticket_status'},
                 { name: 'payment_Status', data: 'payment_status'},
                 { name: 'order_date', data: 'order_date'},
-                // { name: 'created_date', data: 'created_date'},
+                { name: 'event_name', data: 'event_name'},
                 { name: 'action' , data: 'action'}
             ],
             lengthMenu: [10,50,-1],
             order: [[0, 'desc']],
         });
+    }
+   
 
     function cancel(){
         $("#btnCreate").show();

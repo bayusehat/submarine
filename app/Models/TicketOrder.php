@@ -23,8 +23,13 @@ class TicketOrder extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user(): BelongsTo
+    public function user()
     {
         return $this->belongsTo('App\Models\User', 'id_user', 'id_user');
+    }
+
+    public function event()
+    {
+        return $this->belongsTo('App\Models\Event','id_event','id_event');
     }
 }

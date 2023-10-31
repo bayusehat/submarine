@@ -71,4 +71,11 @@ Route::middleware(['user-access'])->group(function () {
     Route::get('/invoice/load','App\Http\Controllers\InvoiceController@loadInvoice');
     Route::get('/invoice/create','App\Http\Controllers\InvoiceController@create');
     Route::post('/invoice/insert','App\Http\Controllers\InvoiceController@insert');
+
+    Route::get('/event','App\Http\Controllers\back\EventController@index');
+    Route::get('/event/load','App\Http\Controllers\back\EventController@loadDataEvent');
+    Route::post('/event/create','App\Http\Controllers\back\EventController@insert');
+    Route::get('/event/edit/{id}','App\Http\Controllers\back\EventController@edit');
+    Route::post('/event/update/{id}','App\Http\Controllers\back\EventController@update');
+    Route::get('/event/delete/{id}','App\Http\Controllers\back\EventController@destroy');
 });

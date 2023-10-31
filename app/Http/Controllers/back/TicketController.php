@@ -8,13 +8,15 @@ use App\Models\TicketOrder;
 use Validator;
 use DataTables;
 use QrCode;
+use App\Models\Event;
 
 class TicketController extends Controller
 {
     public function index(){
         $data = [
             'title' => 'Ticket Order',
-            'content' => 'back.ticket'
+            'content' => 'back.ticket',
+            'events' => Event::all()
         ];
 
         return view('back.index',['data' => $data]);
@@ -22,7 +24,12 @@ class TicketController extends Controller
 
     public function loadDataTicket(Request $request){
         if ($request->ajax()) {
-            $data = TicketOrder::with('user')->get();
+            if($request->get('event') != ""){
+                $where = ['id_event','=',$request->get('event')];
+            }else{
+                $where = ['id_event','!=',null];
+            }
+            $data = TicketOrder::with('user')->with('event')->where([$where])->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('order_date',function($row){
@@ -38,10 +45,10 @@ class TicketController extends Controller
 
                     return $subs;
                 })
-                // ->addColumn('created_date',function($row){
-                //     $date = date('d-m-Y H:i:s',strtotime($row->created_at));
-                //     return $date;
-                // })
+                ->addColumn('event_name',function($row){
+                    $subs = substr($row->event->event_name,0,13).'...';
+                    return $subs;
+                })
                 ->addColumn('ticket_status',function($row){
                     if($row->ticket_status == 'CHECKED'){
                         $badge = '<span class="badge bg-success"><i class="fas fa-check"></i> '.$row->ticket_status.'</span><span class="badge bg-secondary">Updated at : '.date('d-m-y H:i',strtotime($row->updated_at)).'</span>';
